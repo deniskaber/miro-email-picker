@@ -8,13 +8,19 @@ ${email}
 
 type Props = {
     text: string;
+    onRemoveButtonClick: () => void;
 };
 
-export const EmailBlock = ({ text }: Props): HTMLElement => {
+export const EmailBlock = ({ text, onRemoveButtonClick }: Props): HTMLElement => {
     const element = document.createElement("div");
 
     element.innerHTML = getTemplate(text);
     element.classList.add(styles.emailBlock);
+
+    const removeButton = element.querySelector(`.${styles.emailBlockDeleteButton}`) as HTMLButtonElement;
+    removeButton.addEventListener("click", () => {
+        onRemoveButtonClick();
+    });
 
     return element;
 };

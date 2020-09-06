@@ -14,7 +14,9 @@
         <div id="emails-input"></div>
         <script>
             const inputContainerNode = document.querySelector("#emails-input");
-            EmailsEditor(inputContainerNode);
+            const { addEmail } = EmailsEditor(inputContainerNode);
+
+            addEmail("some-valid@email.com");
         </script>
     </body>
 </html>

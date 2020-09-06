@@ -48,6 +48,9 @@ const EmailsEditor = (rootNode: HTMLElement) => {
 
         const emailBlock = EmailBlock({
             text: email,
+            onRemoveButtonClick: () => {
+                emailBlock.remove();
+            },
         });
 
         inputField.before(emailBlock);
@@ -68,6 +71,10 @@ const EmailsEditor = (rootNode: HTMLElement) => {
     };
 
     inputField.addEventListener("blur", handleEmailInputFieldBlur);
+
+    return {
+        addEmail,
+    };
 };
 
 export default EmailsEditor;
