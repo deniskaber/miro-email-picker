@@ -12,14 +12,23 @@
     </head>
     <body>
         <div id="emails-input"></div>
+        <br /><br /><br /><br /><br /><br />
+        <div id="other-emails-input" style="width: 480px; margin: 0 auto"></div>
         <script>
-            const inputContainerNode = document.querySelector("#emails-input");
-            const { addEmail } = EmailsEditor(inputContainerNode);
+            const inputContainerNode = document.querySelector('#emails-input');
+            EmailsEditor(inputContainerNode);
 
-            addEmail("some-valid@email.com");
-            addEmail("some-invalid-email.com");
-            addEmail("some-valid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long@email.com");
-            addEmail("some-valid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-email.com");
+            const otherContainerNode = document.querySelector('#other-emails-input');
+            const { addEmail } = EmailsEditor(otherContainerNode);
+
+            addEmail('some-valid@email.com');
+            addEmail('some-invalid-email.com');
+            addEmail(
+                'some-valid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long@email.com'
+            );
+            addEmail(
+                'some-valid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-email.com'
+            );
         </script>
     </body>
 </html>

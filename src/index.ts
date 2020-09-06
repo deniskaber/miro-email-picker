@@ -3,7 +3,7 @@ import { EmailInputField } from './components/emailInputField';
 import { EmailsContainer } from './components/emailsContainer';
 import { ActionButton } from './components/actionButton';
 import { EmailBlock } from './components/emailBlock';
-import { getRandomEmail } from './utils/email';
+import { checkEmailValidity, getRandomEmail } from './utils/email';
 
 const template = `
 <div class="${styles.widgetContainer}">
@@ -16,7 +16,7 @@ const template = `
 </div>
 `;
 
-const initWidgetTemplate = (rootNode: HTMLElement) => {
+const initEmailsEditorTemplate = (rootNode: HTMLElement) => {
     rootNode.innerHTML = template;
 
     const panelBody = rootNode.querySelector(`.${styles.panelBody}`) as HTMLElement;
@@ -42,21 +42,50 @@ const initWidgetTemplate = (rootNode: HTMLElement) => {
 };
 
 const EmailsEditor = (rootNode: HTMLElement) => {
-    const { emailsContainer, inputField, addEmailButton, getEmailsCountButton } = initWidgetTemplate(rootNode);
+    const { emailsContainer, inputField, addEmailButton, getEmailsCountButton } = initEmailsEditorTemplate(rootNode);
+
+    const addedEmails: string[] = [];
 
     const addEmail = (passedEmail: string) => {
         let email = passedEmail.trim();
 
         email = email.trim();
 
+        const index = addedEmails.findIndex((emailToFind) => emailToFind === email);
+        if (index > -1) {
+            // skip emails that has been already added
+            return;
+        }
+
+        addedEmails.push(email);
+
         const emailBlock = EmailBlock({
             text: email,
             onRemoveButtonClick: () => {
+                const index = addedEmails.findIndex((emailToFind) => emailToFind === email);
+                if (index === -1) {
+                    throw new Error(`Failed to find email "${email}" to remove.`);
+                }
+
+                addedEmails.splice(index, 1);
+
                 emailBlock.remove();
             },
         });
 
         inputField.before(emailBlock);
+    };
+
+    const getValidEmailsList = (): string[] => {
+        return addedEmails.filter(checkEmailValidity);
+    }
+
+    const getEmailsCount = (): number => {
+        const validEmails = getValidEmailsList();
+
+        alert(validEmails.length);
+
+        return validEmails.length;
     };
 
     const handleEmailInputFieldFocus = () => {
@@ -117,9 +146,11 @@ const EmailsEditor = (rootNode: HTMLElement) => {
     });
 
     addEmailButton.addEventListener('click', () => addEmail(getRandomEmail()));
+    getEmailsCountButton.addEventListener('click', () => getEmailsCount());
 
     return {
         addEmail,
+        getValue: getValidEmailsList,
     };
 };
 

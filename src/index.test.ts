@@ -1,4 +1,11 @@
-import { fireEvent, getByPlaceholderText, getByRole, getByText, queryByText } from '@testing-library/dom';
+import {
+    fireEvent,
+    getByPlaceholderText,
+    getByRole,
+    getByText,
+    queryByText,
+    queryAllByText,
+} from '@testing-library/dom';
 import EmailsEditor from './index';
 import * as emailUtils from './utils/email';
 
@@ -124,6 +131,22 @@ describe('Email input widget', () => {
             expect(getByText(root, 'email@example.com')).toBeTruthy();
             expect(getByText(root, 'some-other@email.com')).toBeTruthy();
         });
+
+        it('should not add email that already exists', async () => {
+            const { root, emailEditorInstance } = render();
+
+            emailEditorInstance.addEmail('some-valid@email.com');
+            emailEditorInstance.addEmail('some-valid@email.com');
+
+            const emailBlocks = queryAllByText(root, 'some-valid@email.com');
+            expect(emailBlocks.length).toBe(1);
+
+            emailEditorInstance.addEmail('some-invalid.email.com');
+            emailEditorInstance.addEmail('some-invalid.email.com');
+
+            const invalidEmailBlocks = queryAllByText(root, 'some-invalid.email.com');
+            expect(invalidEmailBlocks.length).toBe(1);
+        });
     });
 
     describe('Removing email block', () => {
@@ -140,5 +163,20 @@ describe('Email input widget', () => {
 
             expect(queryByText(root, 'some-valid@email.com')).toBeFalsy();
         });
+    });
+
+    it('should display amount of valid emails on "Get emails count" button click', () => {
+        const { root, emailEditorInstance } = render();
+
+        const alertSpy = jest.spyOn(window, 'alert').mockImplementationOnce(() => {});
+
+        emailEditorInstance.addEmail('some-valid@email.com');
+        emailEditorInstance.addEmail('some-valid2@email.com');
+        emailEditorInstance.addEmail('some-not-valid-email.com');
+
+        const getEmailsCountButton = getByText(root, 'Get emails count');
+        getEmailsCountButton.click();
+
+        expect(alertSpy).toHaveBeenCalledWith(2);
     });
 });
