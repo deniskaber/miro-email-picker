@@ -66,4 +66,28 @@
 
         font-size: 14px;
     }
+
+    .panelFooter {
+        padding: 24px 50px 32px 50px;
+    }
+
+    .actionButton {
+        background: #4262ff;
+        border-radius: 6px;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+        color: #ffffff;
+        padding: 8px 16px;
+        cursor: pointer;
+        border: 0;
+    }
+
+    .actionButton:hover {
+        background: #2f46b7;
+    }
+
+    .actionButton + .actionButton {
+        margin-left: 16px;
+    }
 }

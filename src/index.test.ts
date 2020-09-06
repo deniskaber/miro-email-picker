@@ -30,4 +30,16 @@ describe("Email input widget", () => {
 
         expect(getByPlaceholderText(root, "add more people...")).toBeTruthy();
     });
+
+    it('should display "Add email" button', () => {
+        const root = render();
+
+        expect(getByText(root, "Add email")).toBeTruthy();
+    });
+
+    it('should display "Get emails count" button', () => {
+        const root = render();
+
+        expect(getByText(root, "Get emails count")).toBeTruthy();
+    });
 });

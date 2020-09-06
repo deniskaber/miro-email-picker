@@ -1,6 +1,7 @@
 import styles from "./styles.scss";
 import { EmailInputField } from "./components/emailInputField";
 import { EmailsContainer } from "./components/emailsContainer";
+import { ActionButton } from "./components/actionButton";
 
 const template = `
 <div class="${styles.widgetContainer}">
@@ -8,6 +9,7 @@ const template = `
         <div class="${styles.panelBody}">
             <p class="${styles.titleText}">Share <span class="${styles.boldText}">Board name</span> with others</p>
         </div>
+        <div class="${styles.panelFooter}"></div>
     </div> 
 </div>
 `;
@@ -15,12 +17,19 @@ const template = `
 const EmailsInput = (rootNode: HTMLElement) => {
     rootNode.innerHTML = template;
 
-    const panel = rootNode.querySelector(`.${styles.panelBody}`) as HTMLElement;
+    const panelBody = rootNode.querySelector(`.${styles.panelBody}`) as HTMLElement;
     const emailsContainer = EmailsContainer();
     const inputField = EmailInputField();
 
     emailsContainer.append(inputField);
-    panel.append(emailsContainer);
+    panelBody.append(emailsContainer);
+
+    const panelFooter = rootNode.querySelector(`.${styles.panelFooter}`) as HTMLElement;
+    const addEmailButton = ActionButton({ text: "Add email" });
+    const getEmailsCountButton = ActionButton({ text: "Get emails count" });
+
+    panelFooter.append(addEmailButton);
+    panelFooter.append(getEmailsCountButton);
 };
 
 export default EmailsInput;
