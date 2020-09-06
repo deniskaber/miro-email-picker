@@ -1,9 +1,9 @@
-import styles from "./styles.scss";
-import { EmailInputField } from "./components/emailInputField";
-import { EmailsContainer } from "./components/emailsContainer";
-import { ActionButton } from "./components/actionButton";
-import { EmailBlock } from "./components/emailBlock";
-import { getRandomEmail } from "./utils/email";
+import styles from './styles.scss';
+import { EmailInputField } from './components/emailInputField';
+import { EmailsContainer } from './components/emailsContainer';
+import { ActionButton } from './components/actionButton';
+import { EmailBlock } from './components/emailBlock';
+import { getRandomEmail } from './utils/email';
 
 const template = `
 <div class="${styles.widgetContainer}">
@@ -27,8 +27,8 @@ const initWidgetTemplate = (rootNode: HTMLElement) => {
     panelBody.append(emailsContainer);
 
     const panelFooter = rootNode.querySelector(`.${styles.panelFooter}`) as HTMLElement;
-    const addEmailButton = ActionButton({ text: "Add email" });
-    const getEmailsCountButton = ActionButton({ text: "Get emails count" });
+    const addEmailButton = ActionButton({ text: 'Add email' });
+    const getEmailsCountButton = ActionButton({ text: 'Get emails count' });
 
     panelFooter.append(addEmailButton);
     panelFooter.append(getEmailsCountButton);
@@ -77,19 +77,19 @@ const EmailsEditor = (rootNode: HTMLElement) => {
 
         addEmail(textValue);
 
-        input.value = "";
+        input.value = '';
     };
 
-    inputField.addEventListener("focus", handleEmailInputFieldFocus);
-    inputField.addEventListener("blur", handleEmailInputFieldBlur);
+    inputField.addEventListener('focus', handleEmailInputFieldFocus);
+    inputField.addEventListener('blur', handleEmailInputFieldBlur);
 
-    emailsContainer.addEventListener("click", (e: MouseEvent) => {
+    emailsContainer.addEventListener('click', (e: MouseEvent) => {
         if (e.target === e.currentTarget) {
             inputField.focus();
         }
     });
 
-    addEmailButton.addEventListener("click", () => addEmail(getRandomEmail()));
+    addEmailButton.addEventListener('click', () => addEmail(getRandomEmail()));
 
     return {
         addEmail,

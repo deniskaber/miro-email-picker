@@ -1,21 +1,21 @@
-import { EmailBlock } from "./emailBlock";
+import { EmailBlock } from './emailBlock';
 
-describe("Email block", () => {
-    it("should display valid email block", () => {
+describe('Email block', () => {
+    it('should display valid email block', () => {
         const emailBlock = EmailBlock({
-            text: "some-valid@email.com",
+            text: 'some-valid@email.com',
             onRemoveButtonClick: () => {},
         });
 
-        expect(emailBlock.classList.contains("emailBlockInvalid")).toBe(false);
+        expect(emailBlock.classList.contains('emailBlockInvalid')).toBe(false);
     });
 
-    it("should display invalid email block", () => {
+    it('should display invalid email block', () => {
         const emailBlock = EmailBlock({
-            text: "some-invalid.email.com",
+            text: 'some-invalid.email.com',
             onRemoveButtonClick: () => {},
         });
 
-        expect(emailBlock.classList.contains("emailBlockInvalid")).toBe(true);
+        expect(emailBlock.classList.contains('emailBlockInvalid')).toBe(true);
     });
 });

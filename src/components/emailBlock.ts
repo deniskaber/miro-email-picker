@@ -1,6 +1,6 @@
-import styles from "../styles.scss";
-import removeIcon from "../assets/icons/remove.svg";
-import { checkEmailValidity } from "../utils/email";
+import styles from '../styles.scss';
+import removeIcon from '../assets/icons/remove.svg';
+import { checkEmailValidity } from '../utils/email';
 
 const getTemplate = (email: string) => `
 ${email}
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const EmailBlock = ({ text, onRemoveButtonClick }: Props): HTMLElement => {
-    const element = document.createElement("div");
+    const element = document.createElement('div');
 
     element.innerHTML = getTemplate(text);
     element.classList.add(styles.emailBlock);
@@ -23,7 +23,7 @@ export const EmailBlock = ({ text, onRemoveButtonClick }: Props): HTMLElement =>
     }
 
     const removeButton = element.querySelector(`.${styles.emailBlockDeleteButton}`) as HTMLButtonElement;
-    removeButton.addEventListener("click", () => {
+    removeButton.addEventListener('click', () => {
         onRemoveButtonClick();
     });
 

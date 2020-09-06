@@ -1,99 +1,99 @@
-import { fireEvent, getByPlaceholderText, getByRole, getByText, queryByText } from "@testing-library/dom";
-import EmailsEditor from "./index";
-import * as emailUtils from "./utils/email";
+import { fireEvent, getByPlaceholderText, getByRole, getByText, queryByText } from '@testing-library/dom';
+import EmailsEditor from './index';
+import * as emailUtils from './utils/email';
 
 const render = () => {
-    const root = document.createElement("div");
+    const root = document.createElement('div');
     const emailEditorInstance = EmailsEditor(root);
 
     return { root, emailEditorInstance };
 };
 
-describe("Email input widget", () => {
-    it("should display title", () => {
+describe('Email input widget', () => {
+    it('should display title', () => {
         const { root } = render();
 
         expect(
-            getByText(root, "Share", {
+            getByText(root, 'Share', {
                 exact: false,
             })
         ).toBeTruthy();
-        expect(getByText(root, "Board name")).toBeTruthy();
+        expect(getByText(root, 'Board name')).toBeTruthy();
         expect(
-            getByText(root, "with others", {
+            getByText(root, 'with others', {
                 exact: false,
             })
         ).toBeTruthy();
     });
 
-    it("should display emails input field", () => {
+    it('should display emails input field', () => {
         const { root } = render();
 
-        expect(getByPlaceholderText(root, "add more people...")).toBeTruthy();
+        expect(getByPlaceholderText(root, 'add more people...')).toBeTruthy();
     });
 
     it('should display "Add email" button', () => {
         const { root } = render();
 
-        expect(getByText(root, "Add email")).toBeTruthy();
+        expect(getByText(root, 'Add email')).toBeTruthy();
     });
 
     it('should display "Get emails count" button', () => {
         const { root } = render();
 
-        expect(getByText(root, "Get emails count")).toBeTruthy();
+        expect(getByText(root, 'Get emails count')).toBeTruthy();
     });
 
-    describe("Adding email block", () => {
-        it("should add email block on email input blur", () => {
+    describe('Adding email block', () => {
+        it('should add email block on email input blur', () => {
             const { root } = render();
 
-            const inputField = getByPlaceholderText(root, "add more people...");
+            const inputField = getByPlaceholderText(root, 'add more people...');
 
             fireEvent.change(inputField, {
                 target: {
-                    value: "email@example.com",
+                    value: 'email@example.com',
                 },
             });
 
             fireEvent.blur(inputField);
 
-            expect(getByText(root, "email@example.com")).toBeTruthy();
+            expect(getByText(root, 'email@example.com')).toBeTruthy();
         });
 
-        it("should add email block using widget api", () => {
+        it('should add email block using widget api', () => {
             const { root, emailEditorInstance } = render();
 
-            emailEditorInstance.addEmail("some-valid@email.com");
+            emailEditorInstance.addEmail('some-valid@email.com');
 
-            expect(getByText(root, "some-valid@email.com")).toBeTruthy();
+            expect(getByText(root, 'some-valid@email.com')).toBeTruthy();
         });
 
         it('should add email block using "Add email" button', () => {
             const { root } = render();
 
-            jest.spyOn(emailUtils, "getRandomEmail").mockReturnValueOnce("very-random@email.com");
+            jest.spyOn(emailUtils, 'getRandomEmail').mockReturnValueOnce('very-random@email.com');
 
-            const addEmailButton = getByText(root, "Add email");
+            const addEmailButton = getByText(root, 'Add email');
             addEmailButton.click();
 
-            expect(getByText(root, "very-random@email.com")).toBeTruthy();
+            expect(getByText(root, 'very-random@email.com')).toBeTruthy();
         });
     });
 
-    describe("Removing email block", () => {
+    describe('Removing email block', () => {
         it("should remove email block on it's remove button click", () => {
             const { root, emailEditorInstance } = render();
 
-            emailEditorInstance.addEmail("some-valid@email.com");
+            emailEditorInstance.addEmail('some-valid@email.com');
 
-            const emailBlock = getByText(root, "some-valid@email.com");
+            const emailBlock = getByText(root, 'some-valid@email.com');
             expect(emailBlock).toBeTruthy();
 
-            const removeButton = getByRole(emailBlock, "button");
+            const removeButton = getByRole(emailBlock, 'button');
             removeButton.click();
 
-            expect(queryByText(root, "some-valid@email.com")).toBeFalsy();
+            expect(queryByText(root, 'some-valid@email.com')).toBeFalsy();
         });
     });
 });
