@@ -1,3 +1,4 @@
+import './polyfills';
 import styles from './styles.scss';
 import { EmailInputField } from './components/emailInputField';
 import { EmailsContainer } from './components/emailsContainer';
@@ -23,15 +24,15 @@ const initEmailsEditorTemplate = (rootNode: HTMLElement) => {
     const emailsContainer = EmailsContainer();
     const inputField = EmailInputField();
 
-    emailsContainer.append(inputField);
-    panelBody.append(emailsContainer);
+    emailsContainer.appendChild(inputField);
+    panelBody.appendChild(emailsContainer);
 
     const panelFooter = rootNode.querySelector(`.${styles.panelFooter}`) as HTMLElement;
     const addEmailButton = ActionButton({ text: 'Add email' });
     const getEmailsCountButton = ActionButton({ text: 'Get emails count' });
 
-    panelFooter.append(addEmailButton);
-    panelFooter.append(getEmailsCountButton);
+    panelFooter.appendChild(addEmailButton);
+    panelFooter.appendChild(getEmailsCountButton);
 
     return {
         emailsContainer,
@@ -73,12 +74,12 @@ const EmailsEditor = (rootNode: HTMLElement) => {
             },
         });
 
-        inputField.before(emailBlock);
+        (inputField.parentElement as HTMLElement).insertBefore(emailBlock, inputField);
     };
 
     const getValidEmailsList = (): string[] => {
         return addedEmails.filter(checkEmailValidity);
-    }
+    };
 
     const getEmailsCount = (): number => {
         const validEmails = getValidEmailsList();
@@ -148,9 +149,16 @@ const EmailsEditor = (rootNode: HTMLElement) => {
     addEmailButton.addEventListener('click', () => addEmail(getRandomEmail()));
     getEmailsCountButton.addEventListener('click', () => getEmailsCount());
 
+    const destroy = () => {
+        Array.from(rootNode.childNodes).forEach((child) => {
+            child.remove();
+        });
+    };
+
     return {
         addEmail,
         getValue: getValidEmailsList,
+        destroy,
     };
 };
 
