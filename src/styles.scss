@@ -76,6 +76,18 @@
         padding-left: 10px;
         border-radius: 100px;
         margin: 4px 8px 0 0;
+
+        &.emailBlockInvalid {
+            background: none;
+            padding-left: 0;
+            border-radius: 0;
+            line-height: 23px;
+            border-bottom: 1px dashed #d92929;
+
+            .emailBlockDeleteButton {
+                padding-right: 0;
+            }
+        }
     }
 
     .emailBlockDeleteButton {
