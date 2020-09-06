@@ -12,6 +12,16 @@ describe("Email input", () => {
     it("should display title", () => {
         const root = render();
 
-        expect(getByText(root, "Type an email")).toBeTruthy();
+        expect(
+            getByText(root, "Share", {
+                exact: false,
+            })
+        ).toBeTruthy();
+        expect(getByText(root, "Board name")).toBeTruthy();
+        expect(
+            getByText(root, "with others", {
+                exact: false,
+            })
+        ).toBeTruthy();
     });
 });
