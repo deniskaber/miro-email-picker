@@ -1,5 +1,6 @@
 import { fireEvent, getByPlaceholderText, getByRole, getByText, queryByText } from "@testing-library/dom";
 import EmailsEditor from "./index";
+import * as emailUtils from "./utils/email";
 
 const render = () => {
     const root = document.createElement("div");
@@ -66,6 +67,17 @@ describe("Email input widget", () => {
             emailEditorInstance.addEmail("some-valid@email.com");
 
             expect(getByText(root, "some-valid@email.com")).toBeTruthy();
+        });
+
+        it('should add email block using "Add email" button', () => {
+            const { root } = render();
+
+            jest.spyOn(emailUtils, "getRandomEmail").mockReturnValueOnce("very-random@email.com");
+
+            const addEmailButton = getByText(root, "Add email");
+            addEmailButton.click();
+
+            expect(getByText(root, "very-random@email.com")).toBeTruthy();
         });
     });
 

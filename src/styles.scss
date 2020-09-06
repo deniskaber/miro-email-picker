@@ -23,6 +23,10 @@
 .widgetContainer {
     min-width: 320px;
 
+    p {
+        margin: 0;
+    }
+
     & * {
         font-family: Open Sans;
         font-style: normal;

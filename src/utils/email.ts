@@ -3,3 +3,7 @@ export const emailRegexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*
 export const checkEmailValidity = (value: string): boolean => {
     return emailRegexp.test(value);
 };
+
+export const getRandomEmail = (): string => {
+    return `${Date.now()}@example.com`;
+};

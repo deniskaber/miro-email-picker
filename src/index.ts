@@ -3,6 +3,7 @@ import { EmailInputField } from "./components/emailInputField";
 import { EmailsContainer } from "./components/emailsContainer";
 import { ActionButton } from "./components/actionButton";
 import { EmailBlock } from "./components/emailBlock";
+import { getRandomEmail } from "./utils/email";
 
 const template = `
 <div class="${styles.widgetContainer}">
@@ -44,7 +45,9 @@ const EmailsEditor = (rootNode: HTMLElement) => {
     const { emailsContainer, inputField, addEmailButton, getEmailsCountButton } = initWidgetTemplate(rootNode);
 
     const addEmail = (passedEmail: string) => {
-        const email = passedEmail.trim();
+        let email = passedEmail.trim();
+
+        email = email.trim();
 
         const emailBlock = EmailBlock({
             text: email,
@@ -71,6 +74,8 @@ const EmailsEditor = (rootNode: HTMLElement) => {
     };
 
     inputField.addEventListener("blur", handleEmailInputFieldBlur);
+
+    addEmailButton.addEventListener("click", () => addEmail(getRandomEmail()));
 
     return {
         addEmail,
