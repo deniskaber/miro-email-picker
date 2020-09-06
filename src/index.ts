@@ -80,8 +80,35 @@ const EmailsEditor = (rootNode: HTMLElement) => {
         input.value = '';
     };
 
+    const handleEmailInputFieldKeyPress = (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ',') {
+            e.preventDefault();
+            const input = e.currentTarget as HTMLInputElement;
+
+            addEmail(input.value);
+
+            input.value = '';
+        }
+    };
+
+    const handleEmailInputFieldPaste = (e: ClipboardEvent) => {
+        if (!e.clipboardData) {
+            return;
+        }
+
+        const paste = e.clipboardData.getData('text');
+
+        e.preventDefault();
+
+        paste.split(',').forEach((email) => {
+            addEmail(email);
+        });
+    };
+
     inputField.addEventListener('focus', handleEmailInputFieldFocus);
     inputField.addEventListener('blur', handleEmailInputFieldBlur);
+    inputField.addEventListener('keydown', handleEmailInputFieldKeyPress);
+    inputField.addEventListener('paste', handleEmailInputFieldPaste);
 
     emailsContainer.addEventListener('click', (e: MouseEvent) => {
         if (e.target === e.currentTarget) {

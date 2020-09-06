@@ -1,4 +1,5 @@
 import { fireEvent, getByPlaceholderText, getByRole, getByText, queryByText } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 import EmailsEditor from './index';
 import * as emailUtils from './utils/email';
 
@@ -78,6 +79,51 @@ describe('Email input widget', () => {
             addEmailButton.click();
 
             expect(getByText(root, 'very-random@email.com')).toBeTruthy();
+        });
+
+        it('should add email block on email input "Enter" key press', async () => {
+            const { root } = render();
+
+            const inputField = getByPlaceholderText(root, 'add more people...');
+
+            fireEvent.change(inputField, {
+                target: {
+                    value: 'email@example.com',
+                },
+            });
+            fireEvent.keyDown(inputField, { key: 'Enter', code: 'Enter' });
+
+            expect(getByText(root, 'email@example.com')).toBeTruthy();
+        });
+
+        it('should add email block on email input "," key press', async () => {
+            const { root } = render();
+
+            const inputField = getByPlaceholderText(root, 'add more people...');
+
+            fireEvent.change(inputField, {
+                target: {
+                    value: 'email@example.com',
+                },
+            });
+            fireEvent.keyDown(inputField, { key: ',', code: ',' });
+
+            expect(getByText(root, 'email@example.com')).toBeTruthy();
+        });
+
+        it('should add email blocks on paste to email input', async () => {
+            const { root } = render();
+
+            const inputField = getByPlaceholderText(root, 'add more people...');
+
+            fireEvent.paste(inputField, {
+                clipboardData: {
+                    getData: () => 'email@example.com, some-other@email.com',
+                },
+            });
+
+            expect(getByText(root, 'email@example.com')).toBeTruthy();
+            expect(getByText(root, 'some-other@email.com')).toBeTruthy();
         });
     });
 
