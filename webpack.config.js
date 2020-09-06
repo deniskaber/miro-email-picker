@@ -15,6 +15,18 @@ module.exports = {
                 include: [path.resolve(__dirname, "src")],
                 loader: "babel-loader",
             },
+            {
+                test: /\.css$/i,
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true,
+                        },
+                    },
+                ],
+            },
         ],
     },
     resolve: {

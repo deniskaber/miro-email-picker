@@ -1,6 +1,10 @@
+import styles from "./styles.css";
+
 const EmailsInput = (rootNode: HTMLElement) => {
     rootNode.innerHTML = `
-Widget will be added here. 
+<div class="${styles.widgetContainer}">
+    Widget will be added here. 
+</div>
     `;
 };
 
