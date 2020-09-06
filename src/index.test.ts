@@ -1,4 +1,4 @@
-import { getByText } from "@testing-library/dom";
+import { getByText, getByPlaceholderText } from "@testing-library/dom";
 import EmailsInput from "./index";
 
 const render = () => {
@@ -8,7 +8,7 @@ const render = () => {
     return root;
 };
 
-describe("Email input", () => {
+describe("Email input widget", () => {
     it("should display title", () => {
         const root = render();
 
@@ -23,5 +23,11 @@ describe("Email input", () => {
                 exact: false,
             })
         ).toBeTruthy();
+    });
+
+    it("should display emails input field", () => {
+        const root = render();
+
+        expect(getByPlaceholderText(root, "Type an email")).toBeTruthy();
     });
 });
