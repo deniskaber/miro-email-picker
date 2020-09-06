@@ -63,6 +63,9 @@
         max-height: 86px;
         overflow-x: hidden;
         overflow-y: auto;
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
     }
 
     .emailInput {
@@ -84,13 +87,15 @@
 
     .emailBlock {
         position: relative;
-        display: inline-block;
+        display: flex;
         font-size: 14px;
         line-height: 24px;
         background: rgba(102, 153, 255, 0.2);
         padding-left: 10px;
         border-radius: 100px;
         margin: 4px 8px 0 0;
+        white-space: nowrap;
+        max-width: calc(100% - 16px);
 
         &.emailBlockInvalid {
             background: none;
@@ -102,7 +107,18 @@
             .emailBlockDeleteButton {
                 padding-right: 0;
             }
+
+            .emailBlockText {
+                max-width: calc(100% - 12px); // full emailBlockDeleteButton width
+            }
         }
+    }
+
+    .emailBlockText {
+        overflow: hidden;
+        max-width: calc(100% - 20px); // full emailBlockDeleteButton width
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .emailBlockDeleteButton {
@@ -135,6 +151,17 @@
 
     .actionButton + .actionButton {
         margin-left: 16px;
+    }
+
+    @media only screen and (max-width: 380px) {
+        .actionButton {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .actionButton + .actionButton {
+            margin: 8px auto 0;
+        }
     }
 
     // emulate browser native outline styles

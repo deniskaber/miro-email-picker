@@ -3,8 +3,8 @@ import removeIcon from '../assets/icons/remove.svg';
 import { checkEmailValidity } from '../utils/email';
 
 const getTemplate = (email: string) => `
-${email}
-<button class="${styles.emailBlockDeleteButton}">${removeIcon}</button>
+<span class="${styles.emailBlockText}">${email}</span>
+<button class="${styles.emailBlockDeleteButton}" aria-label="Remove '${email}'">${removeIcon}</button>
 `;
 
 type Props = {

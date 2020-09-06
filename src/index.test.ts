@@ -1,5 +1,4 @@
 import { fireEvent, getByPlaceholderText, getByRole, getByText, queryByText } from '@testing-library/dom';
-import userEvent from '@testing-library/user-event';
 import EmailsEditor from './index';
 import * as emailUtils from './utils/email';
 
@@ -133,7 +132,7 @@ describe('Email input widget', () => {
 
             emailEditorInstance.addEmail('some-valid@email.com');
 
-            const emailBlock = getByText(root, 'some-valid@email.com');
+            const emailBlock = getByText(root, 'some-valid@email.com').parentElement as HTMLElement;
             expect(emailBlock).toBeTruthy();
 
             const removeButton = getByRole(emailBlock, 'button');
