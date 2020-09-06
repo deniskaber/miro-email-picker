@@ -15,18 +15,18 @@
         <br /><br /><br /><br /><br /><br />
         <div id="other-emails-input" style="width: 480px; margin: 0 auto"></div>
         <script>
-            const inputContainerNode = document.querySelector('#emails-input');
+            var inputContainerNode = document.querySelector('#emails-input');
             EmailsEditor(inputContainerNode);
 
-            const otherContainerNode = document.querySelector('#other-emails-input');
-            const { addEmail } = EmailsEditor(otherContainerNode);
+            var otherContainerNode = document.querySelector('#other-emails-input');
+            var editorInstance = EmailsEditor(otherContainerNode);
 
-            addEmail('some-valid@email.com');
-            addEmail('some-invalid-email.com');
-            addEmail(
+            editorInstance.addEmail('some-valid@email.com');
+            editorInstance.addEmail('some-invalid-email.com');
+            editorInstance.addEmail(
                 'some-valid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long@email.com'
             );
-            addEmail(
+            editorInstance.addEmail(
                 'some-valid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-email.com'
             );
         </script>
