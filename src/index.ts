@@ -2,6 +2,7 @@ import styles from "./styles.scss";
 import { EmailInputField } from "./components/emailInputField";
 import { EmailsContainer } from "./components/emailsContainer";
 import { ActionButton } from "./components/actionButton";
+import { EmailBlock } from "./components/emailBlock";
 
 const template = `
 <div class="${styles.widgetContainer}">
@@ -14,7 +15,7 @@ const template = `
 </div>
 `;
 
-const EmailsInput = (rootNode: HTMLElement) => {
+const initWidgetTemplate = (rootNode: HTMLElement) => {
     rootNode.innerHTML = template;
 
     const panelBody = rootNode.querySelector(`.${styles.panelBody}`) as HTMLElement;
@@ -30,6 +31,43 @@ const EmailsInput = (rootNode: HTMLElement) => {
 
     panelFooter.append(addEmailButton);
     panelFooter.append(getEmailsCountButton);
+
+    return {
+        emailsContainer,
+        inputField,
+        addEmailButton,
+        getEmailsCountButton,
+    };
 };
 
-export default EmailsInput;
+const EmailsEditor = (rootNode: HTMLElement) => {
+    const { emailsContainer, inputField, addEmailButton, getEmailsCountButton } = initWidgetTemplate(rootNode);
+
+    const addEmail = (passedEmail: string) => {
+        const email = passedEmail.trim();
+
+        const emailBlock = EmailBlock({
+            text: email,
+        });
+
+        inputField.before(emailBlock);
+    };
+
+    const handleEmailInputFieldBlur = (e: FocusEvent) => {
+        const input = e.currentTarget as HTMLInputElement;
+
+        const textValue = input.value;
+
+        if (!textValue) {
+            return;
+        }
+
+        addEmail(textValue);
+
+        input.value = "";
+    };
+
+    inputField.addEventListener("blur", handleEmailInputFieldBlur);
+};
+
+export default EmailsEditor;

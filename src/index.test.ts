@@ -1,9 +1,9 @@
-import { getByText, getByPlaceholderText } from "@testing-library/dom";
-import EmailsInput from "./index";
+import { fireEvent, getByPlaceholderText, getByText } from "@testing-library/dom";
+import EmailsEditor from "./index";
 
 const render = () => {
     const root = document.createElement("div");
-    EmailsInput(root);
+    EmailsEditor(root);
 
     return root;
 };
@@ -41,5 +41,23 @@ describe("Email input widget", () => {
         const root = render();
 
         expect(getByText(root, "Get emails count")).toBeTruthy();
+    });
+
+    describe("Adding email block", () => {
+        it("should add email block on email input blur", () => {
+            const root = render();
+
+            const inputField = getByPlaceholderText(root, "add more people...");
+
+            fireEvent.change(inputField, {
+                target: {
+                    value: "email@example.com",
+                },
+            });
+
+            fireEvent.blur(inputField);
+
+            expect(getByText(root, "email@example.com")).toBeTruthy();
+        });
     });
 });

@@ -4,7 +4,7 @@ module.exports = {
     entry: "./src/index",
     output: {
         path: path.resolve(__dirname, "dist"),
-        library: "EmailsInput",
+        library: "EmailsEditor",
         libraryTarget: "var",
         libraryExport: "default",
     },
@@ -28,6 +28,13 @@ module.exports = {
                     },
                     "sass-loader",
                 ],
+            },
+            {
+                test: /\.svg$/,
+                loader: "svg-inline-loader",
+                options: {
+                    removeSVGTagAttrs: false,
+                },
             },
         ],
     },

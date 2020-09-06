@@ -67,6 +67,25 @@
         font-size: 14px;
     }
 
+    .emailBlock {
+        position: relative;
+        display: inline-block;
+        font-size: 14px;
+        line-height: 24px;
+        background: rgba(102, 153, 255, 0.2);
+        padding-left: 10px;
+        border-radius: 100px;
+        margin: 4px 8px 0 0;
+    }
+
+    .emailBlockDeleteButton {
+        background: none;
+        border: 0;
+        height: 100%;
+        padding: 0 8px 0 4px;
+        cursor: pointer;
+    }
+
     .panelFooter {
         padding: 24px 50px 32px 50px;
     }
