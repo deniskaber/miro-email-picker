@@ -28,6 +28,6 @@ describe("Email input widget", () => {
     it("should display emails input field", () => {
         const root = render();
 
-        expect(getByPlaceholderText(root, "Type an email")).toBeTruthy();
+        expect(getByPlaceholderText(root, "add more people...")).toBeTruthy();
     });
 });

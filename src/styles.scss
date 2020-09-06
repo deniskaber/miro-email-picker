@@ -23,9 +23,22 @@
 .widgetContainer {
     min-width: 320px;
 
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
+    & * {
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: normal;
+    }
+
+    .panel {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .panelBody {
+        padding: 32px 50px 24px 50px;
+        background: #f8f8f7;
+    }
 
     .titleText {
         font-size: 20px;
@@ -36,5 +49,21 @@
 
     .boldText {
         font-weight: bold;
+    }
+
+    .emailsContainer {
+        background: #ffffff;
+        border: 1px solid #c3c2cf;
+        border-radius: 4px;
+        padding: 4px 0 8px 8px;
+    }
+
+    .emailInput {
+        height: 24px;
+        border: 0;
+        margin: 4px 8px 0 0;
+        padding: 0;
+
+        font-size: 14px;
     }
 }
