@@ -59,8 +59,15 @@ const EmailsEditor = (rootNode: HTMLElement) => {
         inputField.before(emailBlock);
     };
 
+    const handleEmailInputFieldFocus = () => {
+        emailsContainer.classList.add(styles.unrealFocus);
+    };
+
     const handleEmailInputFieldBlur = (e: FocusEvent) => {
+        e.stopPropagation();
         const input = e.currentTarget as HTMLInputElement;
+
+        emailsContainer.classList.remove(styles.unrealFocus);
 
         const textValue = input.value;
 
@@ -73,7 +80,14 @@ const EmailsEditor = (rootNode: HTMLElement) => {
         input.value = "";
     };
 
+    inputField.addEventListener("focus", handleEmailInputFieldFocus);
     inputField.addEventListener("blur", handleEmailInputFieldBlur);
+
+    emailsContainer.addEventListener("click", (e: MouseEvent) => {
+        if (e.target === e.currentTarget) {
+            inputField.focus();
+        }
+    });
 
     addEmailButton.addEventListener("click", () => addEmail(getRandomEmail()));
 

@@ -60,6 +60,9 @@
         border: 1px solid #c3c2cf;
         border-radius: 4px;
         padding: 4px 0 8px 8px;
+        max-height: 86px;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .emailInput {
@@ -67,8 +70,16 @@
         border: 0;
         margin: 4px 8px 0 0;
         padding: 0;
-
+        outline: none;
         font-size: 14px;
+
+        &::placeholder {
+            color: #c3c2cf;
+        }
+
+        &:focus::placeholder {
+            color: transparent;
+        }
     }
 
     .emailBlock {
@@ -124,5 +135,19 @@
 
     .actionButton + .actionButton {
         margin-left: 16px;
+    }
+
+    // emulate browser native outline styles
+    .unrealFocus {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: Highlight;
+    }
+
+    @media (-webkit-min-device-pixel-ratio: 0) {
+        .unrealFocus {
+            outline-color: -webkit-focus-ring-color;
+            outline-style: auto;
+        }
     }
 }
