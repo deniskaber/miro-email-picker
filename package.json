@@ -1,8 +1,8 @@
 {
-  "name": "miro-email-picker",
-  "version": "1.0.0",
+  "name": "@dberezin/miro-email-picker",
+  "version": "1.0.1",
   "description": "Frontend test assessment for Miro",
-  "main": "src/index.ts",
+  "main": "dist/main.js",
   "scripts": {
     "start": "webpack --watch -d",
     "build": "webpack -p",
@@ -12,6 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/deniskaber/miro-email-picker.git"
   },
+  "files": ["dist/main.js"],
   "author": "Denis Berezin <mr.denis.berezin@gmail.com>",
   "bugs": {
     "url": "https://github.com/deniskaber/miro-email-picker/issues"

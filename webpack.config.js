@@ -4,7 +4,7 @@ module.exports = {
     entry: "./src/index",
     output: {
         path: path.resolve(__dirname, "dist"),
-        library: "EmailsEditor",
+        library: "EmailsPicker",
         libraryTarget: "var",
         libraryExport: "default",
     },

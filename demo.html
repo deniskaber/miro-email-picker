@@ -2,10 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Document</title>
         <script src="./dist/main.js"></script>
@@ -16,10 +13,10 @@
         <div id="other-emails-input" style="width: 480px; margin: 0 auto"></div>
         <script>
             var inputContainerNode = document.querySelector('#emails-input');
-            EmailsEditor(inputContainerNode);
+            EmailsPicker(inputContainerNode);
 
             var otherContainerNode = document.querySelector('#other-emails-input');
-            var editorInstance = EmailsEditor(otherContainerNode);
+            var editorInstance = EmailsPicker(otherContainerNode);
 
             editorInstance.addEmail('some-valid@email.com');
             editorInstance.addEmail('some-invalid-email.com');
@@ -27,7 +24,7 @@
                 'some-valid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long@email.com'
             );
             editorInstance.addEmail(
-                'some-valid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-email.com'
+                'some-invalid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-email.com'
             );
         </script>
     </body>

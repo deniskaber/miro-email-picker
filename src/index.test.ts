@@ -6,12 +6,12 @@ import {
     queryByText,
     queryAllByText,
 } from '@testing-library/dom';
-import EmailsEditor from './index';
+import EmailsPicker from './index';
 import * as emailUtils from './utils/email';
 
 const render = () => {
     const root = document.createElement('div');
-    const emailEditorInstance = EmailsEditor(root);
+    const emailEditorInstance = EmailsPicker(root);
 
     return { root, emailEditorInstance };
 };

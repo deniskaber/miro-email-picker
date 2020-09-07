@@ -8,6 +8,7 @@ export const EmailInputField = (): HTMLElement => {
     element.classList.add(styles.emailInput);
     element.placeholder = 'add more people...';
     element.spellcheck = false;
+    element.setAttribute('aria-label', 'add more people');
 
     return element;
 };

@@ -42,7 +42,7 @@ const initEmailsEditorTemplate = (rootNode: HTMLElement) => {
     };
 };
 
-const EmailsEditor = (rootNode: HTMLElement) => {
+const EmailsPicker = (rootNode: HTMLElement) => {
     const { emailsContainer, inputField, addEmailButton, getEmailsCountButton } = initEmailsEditorTemplate(rootNode);
 
     const addedEmails: string[] = [];
@@ -162,4 +162,4 @@ const EmailsEditor = (rootNode: HTMLElement) => {
     };
 };
 
-export default EmailsEditor;
+export default EmailsPicker;
