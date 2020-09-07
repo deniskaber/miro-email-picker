@@ -3,7 +3,7 @@ import { EmailBlock } from './emailBlock';
 describe('Email block', () => {
     it('should display valid email block', () => {
         const emailBlock = EmailBlock({
-            text: 'some-valid@email.com',
+            email: 'some-valid@email.com',
             onRemoveButtonClick: () => {},
         });
 
@@ -12,7 +12,7 @@ describe('Email block', () => {
 
     it('should display invalid email block', () => {
         const emailBlock = EmailBlock({
-            text: 'some-invalid.email.com',
+            email: 'some-invalid.email.com',
             onRemoveButtonClick: () => {},
         });
 

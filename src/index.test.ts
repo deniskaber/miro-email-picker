@@ -147,6 +147,24 @@ describe('Email input widget', () => {
             const invalidEmailBlocks = queryAllByText(root, 'some-invalid.email.com');
             expect(invalidEmailBlocks.length).toBe(1);
         });
+
+        it('should not add email block that is a space', async () => {
+            const { root, emailEditorInstance } = render();
+
+            emailEditorInstance.addEmail(' ');
+
+            const emailBlocks = root.querySelectorAll(`[data-email=""]`);
+            expect(emailBlocks.length).toBe(0);
+        });
+
+        it('should not add email block that is an empty string', async () => {
+            const { root, emailEditorInstance } = render();
+
+            emailEditorInstance.addEmail('');
+
+            const emailBlocks = root.querySelectorAll(`[data-email=""]`);
+            expect(emailBlocks.length).toBe(0);
+        });
     });
 
     describe('Removing email block', () => {
@@ -160,6 +178,18 @@ describe('Email input widget', () => {
 
             const removeButton = getByRole(emailBlock, 'button');
             removeButton.click();
+
+            expect(queryByText(root, 'some-valid@email.com')).toBeFalsy();
+        });
+
+        it('should remove email block on "Backspace" key press', () => {
+            const { root, emailEditorInstance } = render();
+
+            emailEditorInstance.addEmail('some-valid@email.com');
+            expect(queryByText(root, 'some-valid@email.com')).toBeTruthy();
+
+            const inputField = getByPlaceholderText(root, 'add more people...');
+            fireEvent.keyDown(inputField, { key: 'Backspace', code: 'Backspace' });
 
             expect(queryByText(root, 'some-valid@email.com')).toBeFalsy();
         });

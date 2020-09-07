@@ -52,6 +52,10 @@ const EmailsPicker = (rootNode: HTMLElement) => {
 
         email = email.trim();
 
+        if (!email.length) {
+            return;
+        }
+
         const index = addedEmails.findIndex((emailToFind) => emailToFind === email);
         if (index > -1) {
             // skip emails that has been already added
@@ -61,20 +65,25 @@ const EmailsPicker = (rootNode: HTMLElement) => {
         addedEmails.push(email);
 
         const emailBlock = EmailBlock({
-            text: email,
+            email,
             onRemoveButtonClick: () => {
-                const index = addedEmails.findIndex((emailToFind) => emailToFind === email);
-                if (index === -1) {
-                    throw new Error(`Failed to find email "${email}" to remove.`);
-                }
-
-                addedEmails.splice(index, 1);
-
-                emailBlock.remove();
+                removeEmail(email);
             },
         });
 
         (inputField.parentElement as HTMLElement).insertBefore(emailBlock, inputField);
+    };
+
+    const removeEmail = (email: string): void => {
+        const index = addedEmails.findIndex((emailToFind) => emailToFind === email);
+        const emailBlock = rootNode.querySelector(`.${styles.emailBlock}[data-email="${email}"]`);
+
+        if (index === -1 || !emailBlock) {
+            throw new Error(`Failed to find email "${email}" to remove.`);
+        }
+
+        addedEmails.splice(index, 1);
+        emailBlock.remove();
     };
 
     const getValidEmailsList = (): string[] => {
@@ -111,13 +120,19 @@ const EmailsPicker = (rootNode: HTMLElement) => {
     };
 
     const handleEmailInputFieldKeyPress = (e: KeyboardEvent) => {
+        const input = e.currentTarget as HTMLInputElement;
+
         if (e.key === 'Enter' || e.key === ',') {
             e.preventDefault();
-            const input = e.currentTarget as HTMLInputElement;
 
             addEmail(input.value);
 
             input.value = '';
+        }
+
+        if (e.key === 'Backspace' && !input.value) {
+            const lastEmail = addedEmails[addedEmails.length - 1];
+            removeEmail(lastEmail);
         }
     };
 
@@ -157,6 +172,7 @@ const EmailsPicker = (rootNode: HTMLElement) => {
 
     return {
         addEmail,
+        removeEmail,
         getValue: getValidEmailsList,
         destroy,
     };

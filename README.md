@@ -28,7 +28,7 @@ Import js bundle from `https://deniskaber.github.io/miro-email-picker/dist/main.
 <body>
     <div id="emails-input"></div>
     <script>
-        const { addEmail, getValue, destroy } = EmailsPicker(document.getElementById('emails-input'));
+        const { addEmail, removeEmail, getValue, destroy } = EmailsPicker(document.getElementById('emails-input'));
     </script>
 </body>
 </html>
@@ -44,7 +44,7 @@ Import js bundle from `https://deniskaber.github.io/miro-email-picker/dist/main.
 ```javascript
 import EmailsPicker from '@dberezin/miro-email-picker';
 
-const { addEmail, getValue, destroy } = EmailsPicker(document.getElementById('emails-input'));
+const { addEmail, removeEmail, getValue, destroy } = EmailsPicker(document.getElementById('emails-input'));
 ```
 
 ## API 
@@ -52,5 +52,6 @@ const { addEmail, getValue, destroy } = EmailsPicker(document.getElementById('em
 `EmailsPicker` returns an object with these methods:
 
 -   `addEmail: (email: string) => void` - adds an email to the EmailsPicker instance
+-   `removeEmail: (email: string) => void` - removes added email from the EmailsPicker instance
 -   `getValue: () => string[]` - returns the list of added **valid** emails
 -   `destroy: () => void` - removes the widget

@@ -10,7 +10,7 @@
     <body>
         <div id="emails-input"></div>
         <br /><br /><br /><br /><br /><br />
-        <div id="other-emails-input" style="width: 480px; margin: 0 auto"></div>
+        <div id="other-emails-input" style="width: 540px; margin: 0 auto"></div>
         <script>
             var inputContainerNode = document.querySelector('#emails-input');
             EmailsPicker(inputContainerNode);
@@ -18,8 +18,10 @@
             var otherContainerNode = document.querySelector('#other-emails-input');
             var editorInstance = EmailsPicker(otherContainerNode);
 
-            editorInstance.addEmail('some-valid@email.com');
-            editorInstance.addEmail('some-invalid-email.com');
+            editorInstance.addEmail('john@miro.com');
+            editorInstance.addEmail('invalid.email');
+            editorInstance.addEmail('mike@miro.com');
+            editorInstance.addEmail('alexander@miro.com');
             editorInstance.addEmail(
                 'some-valid-but-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long@email.com'
             );

@@ -8,17 +8,18 @@ const getTemplate = (email: string) => `
 `;
 
 type Props = {
-    text: string;
+    email: string;
     onRemoveButtonClick: () => void;
 };
 
-export const EmailBlock = ({ text, onRemoveButtonClick }: Props): HTMLElement => {
+export const EmailBlock = ({ email, onRemoveButtonClick }: Props): HTMLElement => {
     const element = document.createElement('div');
 
-    element.innerHTML = getTemplate(text);
+    element.innerHTML = getTemplate(email);
     element.classList.add(styles.emailBlock);
+    element.dataset.email = email;
 
-    if (!checkEmailValidity(text)) {
+    if (!checkEmailValidity(email)) {
         element.classList.add(styles.emailBlockInvalid);
     }
 

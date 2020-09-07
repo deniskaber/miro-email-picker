@@ -7,6 +7,10 @@
         margin: 0;
     }
 
+    button {
+        margin: 0;
+    }
+
     & * {
         font-family: Open Sans;
         font-style: normal;
@@ -110,7 +114,7 @@
         background: none;
         border: 0;
         height: 100%;
-        padding: 0 8px 0 4px;
+        padding: 0 8px 0 8px;
         cursor: pointer;
     }
 
